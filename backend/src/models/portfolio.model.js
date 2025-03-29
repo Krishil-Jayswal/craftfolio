@@ -1,10 +1,14 @@
 import mongoose from 'mongoose';
 
 const portfolioSchema = new mongoose.Schema({
+  id: {
+    type: String,
+    required: true,
+    trim: true,
+  },
   userId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
-    required: true,
   },
   title: {
     type: String,
@@ -16,8 +20,32 @@ const portfolioSchema = new mongoose.Schema({
     required: true,
     trim: true,
   },
+  isTemplate: {
+    type: Boolean,
+    default: false,
+  },
+  title: {
+    type: String,
+    required: true,
+    trim: true,
+  },
+  description: {
+    type: String,
+    required: true,
+    trim: true,
+  },
+  codeurl: {
+    type: String,
+    required: true,
+    trim: true,
+  },
+  imageurl: {
+    type: String,
+    required: true,
+    trim: true,
+  },
 }, 
-{ 
+{
     timestamps: true 
 });
 
