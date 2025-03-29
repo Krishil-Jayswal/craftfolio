@@ -32,18 +32,12 @@ export const register = async (req, res) => {
 
     await user.save();
 
-    // Creating the token and setting the cookies
+    // Creating the token
     const token = jwt.sign(
       { id: user._id, name: user.name, email: user.email },
       JWT_SECRET,
       { expiresIn: maxAge }
     );
-    res.cookie("token", token, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: "None",
-      maxAge,
-    });
 
     // Return the new user
     return res.status(201).json({
@@ -52,6 +46,7 @@ export const register = async (req, res) => {
         id: user._id,
         name: user.name,
         email: user.email,
+        token
       },
     });
   } catch (error) {
@@ -89,12 +84,6 @@ export const login = async (req, res) => {
       JWT_SECRET,
       { expiresIn: maxAge }
     );
-    res.cookie("token", token, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: "None",
-      maxAge,
-    });
 
     // Return the user
     return res.status(200).json({
@@ -103,6 +92,7 @@ export const login = async (req, res) => {
         id: user._id,
         name: user.name,
         email: user.email,
+        token
       },
     });
   } catch (error) {
@@ -113,8 +103,6 @@ export const login = async (req, res) => {
 
 // Logout Controller
 export const logout = (req, res) => {
-  // clear the cookies
-  res.clearCookie("token");
   return res.status(200).json({ message: "Logout successful." });
 };
 
@@ -124,6 +112,7 @@ export const me = (req, res) => {
   return res.status(200).json({ user: {
     id: user.id,
     name: user.name,
-    email: user.email
+    email: user.email,
+    token: user.token
   } });
 };

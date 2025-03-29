@@ -1,6 +1,5 @@
 import express from "express";
 import V1Router from "./routes/index.route.js";
-import cookieParser from "cookie-parser";
 import cors from "cors";
 import { connectDB } from "./config/db.js";
 import { CLIENT_URL, DATABASE_URL, PORT } from "./config/constants.js";
@@ -9,12 +8,9 @@ const app = express();
 
 app.use(cors({
     origin: CLIENT_URL,
-    credentials: true,
     allowedHeaders: ["Content-Type", "Authorization"],
     methods: ["GET", "POST", "PUT", "DELETE"]
 }));
-
-app.use(cookieParser());
 
 app.use(express.json());
 
