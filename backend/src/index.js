@@ -1,18 +1,35 @@
 import express from "express";
-import V1Router from "./routes/index.route";
+import V1Router from "./routes/index.route.js";
 import cookieParser from "cookie-parser";
 import cors from "cors";
+import { connectDB } from "./config/db.js";
+import { CLIENT_URL, DATABASE_URL, PORT } from "./config/constants.js";
 
 const app = express();
 
-app.use(cors());
+app.use(cors({
+    origin: CLIENT_URL,
+    credentials: true,
+    allowedHeaders: ["Content-Type", "Authorization"],
+    methods: ["GET", "POST", "PUT", "DELETE"]
+}));
 
 app.use(cookieParser());
 
 app.use(express.json());
 
+app.get("/health", (req, res) => {
+    return res.json({message: "Server is running."});
+});
+
 app.use("/api/v1", V1Router);
 
-app.listen(8080, (err) => {
+app.listen(PORT, async (error) => {
+    if(error) {
+        console.error("Error in starting server: ", error);
+        process.exit(1);
+    }
 
+    await connectDB(DATABASE_URL);
+    console.log("Server is running on port ", PORT);
 });

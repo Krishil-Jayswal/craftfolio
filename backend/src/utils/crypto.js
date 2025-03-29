@@ -1,7 +1,7 @@
 import bcrypt from "bcryptjs"
 
 export const createHash = (text) => {
-    const salt = bcrypt.genSalt(10);
+    const salt = bcrypt.genSaltSync(10);
     const hash = bcrypt.hashSync(text, salt);
     return hash;
 }
