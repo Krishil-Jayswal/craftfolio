@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Michael Scott | Experienced SDE</title>
+    <style>
+        /* Base & Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            transition: background 0.5s, color 0.5s;
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* Themes */
+        body.light {
+            background: #f2f2f2;
+            color: #333;
+        }
+
+        body.dark {
+            background: #1a1a1a;
+            color: #ddd;
+        }
+
+        /* Split-Screen Intro */
+        .split {
+            display: flex;
+            height: 100vh;
+            width: 100vw;
+            overflow: hidden;
+        }
+
+        .left-side {
+            flex: 1;
+            background: #4caf50;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 40px;
+            clip-path: polygon(0 0, 100% 0, 100% 100%, 0 90%);
+        }
+
+        .left-side h1 {
+            font-size: 3em;
+            margin-bottom: 20px;
+            color: #fff;
+            animation: fadeInDown 1s forwards;
+            opacity: 0;
+        }
+
+        .left-side p {
+            font-size: 1.2em;
+            color: #fff;
+            max-width: 400px;
+            animation: fadeInDown 1.2s forwards;
+            opacity: 0;
+        }
+
+        @keyframes fadeInDown {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+        }
+
+        .right-side {
+            width: 250px;
+            background: #2e7d32;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .right-side h2 {
+            color: #fff;
+            margin-bottom: 20px;
+        }
+
+        .nav-links {
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin: 15px 0;
+        }
+
+        .nav-links a {
+            color: #fff;
+            font-weight: bold;
+            transition: transform 0.3s;
+        }
+
+        .nav-links a:hover {
+            transform: translateX(5px);
+        }
+
+        .toggle-btn {
+            background: transparent;
+            border: 1px solid #fff;
+            color: #fff;
+            padding: 6px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        /* Sections below split */
+        .content {
+            padding: 60px 30px;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .section-title {
+            font-size: 2em;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: "";
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: #4caf50;
+        }
+
+        section {
+            margin-bottom: 40px;
+        }
+
+        .timeline {
+            border-left: 3px solid #4caf50;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .timeline-item {
+            margin: 20px 0;
+            opacity: 0;
+            transform: translateX(-20px);
+            transition: opacity 0.5s, transform 0.5s;
+        }
+
+        .timeline-item.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .timeline-item h3 {
+            margin-bottom: 5px;
+        }
+
+        .projects {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .project-card {
+            background: #fff;
+            padding: 20px;
+            border-radius: 6px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+            flex: 1;
+            min-width: 250px;
+            transition: transform 0.3s;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+        }
+
+        body.dark .project-card {
+            background: #3a3a3a;
+        }
+
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .skill {
+            background: #4caf50;
+            color: #fff;
+            padding: 8px 15px;
+            border-radius: 20px;
+            transition: transform 0.3s;
+        }
+
+        .skill:hover {
+            transform: scale(1.1);
+        }
+
+        body.dark .skill {
+            background: #66bb6a;
+        }
+
+        form {
+            max-width: 500px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        form input,
+        form textarea {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        form button {
+            background: #4caf50;
+            color: #fff;
+            border: none;
+            padding: 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        form button:hover {
+            background: #388e3c;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .split {
+                flex-direction: column;
+                height: auto;
+            }
+
+            .left-side {
+                clip-path: none;
+                height: 50vh;
+            }
+
+            .right-side {
+                width: 100%;
+                flex-direction: row;
+                height: auto;
+                justify-content: space-between;
+            }
+
+            .nav-links {
+                display: flex;
+                gap: 10px;
+            }
+
+            .nav-links li {
+                margin: 0;
+            }
+
+            .content {
+                padding: 30px;
+            }
+        }
+    </style>
+</head>
+
+<body class="light">
+    <!-- Split Screen -->
+    <div class="split">
+        <div class="left-side">
+            <h1>Michael Scott</h1>
+            <p>Experienced Software Development Engineer</p>
+        </div>
+        <div class="right-side">
+            <h2>Menu</h2>
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <button class="toggle-btn" onclick="toggleTheme()">Toggle Theme</button>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="content">
+        <section id="about">
+            <div class="section-title">About Me</div>
+            <p>I am a seasoned SDE with a strong background in full-stack development, system architecture, and agile
+                methodologies. I thrive on building scalable solutions and mentoring teams to deliver high-quality
+                products.</p>
+        </section>
+
+        <section id="experience">
+            <div class="section-title">Experience</div>
+            <div class="timeline" id="timeline">
+                <div class="timeline-item">
+                    <h3>2017 - Joined TechCorp</h3>
+                    <p>Started as a junior developer, learning the ropes in a fast-paced environment.</p>
+                </div>
+                <div class="timeline-item">
+                    <h3>2019 - Mid-Level Engineer</h3>
+                    <p>Led several product launches and coordinated cross-functional teams.</p>
+                </div>
+                <div class="timeline-item">
+                    <h3>2021 - Senior SDE</h3>
+                    <p>Oversaw large-scale projects, architected high-traffic systems, and mentored new engineers.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects">
+            <div class="section-title">Projects</div>
+            <div class="projects">
+                <div class="project-card">
+                    <h3>Enterprise Dashboard</h3>
+                    <p>Created a robust analytics dashboard for enterprise data visualization.</p>
+                </div>
+                <div class="project-card">
+                    <h3>Cloud Integration</h3>
+                    <p>Developed microservices to seamlessly integrate various cloud platforms.</p>
+                </div>
+                <div class="project-card">
+                    <h3>Mobile Banking App</h3>
+                    <p>Built a secure and user-friendly application for digital banking services.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="skills">
+            <div class="section-title">Skills</div>
+            <div class="skills">
+                <div class="skill">Java</div>
+                <div class="skill">Python</div>
+                <div class="skill">React</div>
+                <div class="skill">AWS</div>
+                <div class="skill">Node.js</div>
+            </div>
+        </section>
+
+        <section id="contact">
+            <div class="section-title">Contact</div>
+            <form onsubmit="event.preventDefault(); alert('Thank you for reaching out!');">
+                <input type="text" placeholder="Your Name" required />
+                <input type="email" placeholder="Your Email" required />
+                <textarea rows="4" placeholder="Your Message" required></textarea>
+                <button type="submit">Send Message</button>
+            </form>
+        </section>
+    </div>
+
+    <script>
+        function toggleTheme() {
+            document.body.classList.toggle('light');
+            document.body.classList.toggle('dark');
+        }
+        // Reveal timeline on scroll
+        const items = document.querySelectorAll('.timeline-item');
+        function revealTimeline() {
+            items.forEach(item => {
+                const rect = item.getBoundingClientRect();
+                if (rect.top < window.innerHeight - 100) {
+                    item.classList.add('visible');
+                }
+            });
+        }
+        window.addEventListener('scroll', revealTimeline);
+        revealTimeline();
+    </script>
+</body>
+
+</html>

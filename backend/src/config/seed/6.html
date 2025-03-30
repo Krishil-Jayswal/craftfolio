@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Emily Green | Content Writer</title>
+    <style>
+        /* Base & Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            transition: background 0.5s, color 0.5s;
+            overflow: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* Themes */
+        body.light {
+            background: #fdfdfd;
+            color: #333;
+        }
+
+        body.dark {
+            background: #2e2e2e;
+            color: #ccc;
+        }
+
+        /* Horizontal Scroll Container */
+        .h-scroll {
+            display: flex;
+            flex-direction: row;
+            width: 400vw;
+            height: 100vh;
+            transition: transform 0.8s ease;
+        }
+
+        .panel {
+            width: 100vw;
+            height: 100vh;
+            flex-shrink: 0;
+            padding: 40px;
+            overflow-y: auto;
+            box-sizing: border-box;
+        }
+
+        /* Distinct Panel Colors */
+        .panel1 {
+            background: #6a1b9a;
+            color: #fff;
+        }
+
+        .panel2 {
+            background: #ab47bc;
+        }
+
+        .panel3 {
+            background: #ce93d8;
+            color: #333;
+        }
+
+        .panel4 {
+            background: #f3e5f5;
+            color: #333;
+        }
+
+        /* Navigation (Fixed) */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 999;
+        }
+
+        .nav .logo {
+            font-size: 1.8em;
+            font-weight: bold;
+            color: #fff;
+        }
+
+        .nav .links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .nav .links button {
+            background: transparent;
+            border: 2px solid #fff;
+            color: #fff;
+            padding: 6px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9em;
+            transition: background 0.3s;
+        }
+
+        .nav .links button:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Panel Content */
+        h1,
+        h2 {
+            margin-bottom: 20px;
+        }
+
+        .panel1 h1 {
+            font-size: 3em;
+            margin-top: 100px;
+        }
+
+        .panel1 p {
+            font-size: 1.2em;
+            max-width: 500px;
+            line-height: 1.6;
+        }
+
+        .article-list {
+            list-style: none;
+            margin-top: 20px;
+        }
+
+        .article-list li {
+            margin-bottom: 15px;
+        }
+
+        /* Contact Form */
+        form {
+            max-width: 400px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 40px;
+        }
+
+        form input,
+        form textarea {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        form button {
+            background: #6a1b9a;
+            color: #fff;
+            border: none;
+            padding: 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        form button:hover {
+            background: #4a148c;
+        }
+
+        /* Responsive (fallback to vertical if needed) */
+        @media (max-width: 768px) {
+            .h-scroll {
+                flex-direction: column;
+                width: 100%;
+                height: auto;
+            }
+
+            .panel {
+                width: 100%;
+                height: auto;
+            }
+        }
+    </style>
+</head>
+
+<body class="light">
+    <!-- Navigation -->
+    <div class="nav">
+        <div class="logo">Emily Green</div>
+        <div class="links">
+            <button onclick="scrollToPanel(0)">About</button>
+            <button onclick="scrollToPanel(1)">Writings</button>
+            <button onclick="scrollToPanel(2)">Editorials</button>
+            <button onclick="scrollToPanel(3)">Contact</button>
+            <button onclick="toggleTheme()">Toggle Theme</button>
+        </div>
+    </div>
+
+    <!-- Horizontal Scroll Container -->
+    <div class="h-scroll" id="hScroll">
+        <!-- Panel 1: About -->
+        <div class="panel panel1">
+            <h1>Emily Green</h1>
+            <p>I am a passionate content writer with a flair for storytelling. My work spans blogging, copywriting, and
+                editorial content that captivates audiences and drives engagement.</p>
+        </div>
+
+        <!-- Panel 2: Writings -->
+        <div class="panel panel2">
+            <h2>My Writings</h2>
+            <ul class="article-list">
+                <li>"The Art of Digital Storytelling" – Crafting compelling online narratives.</li>
+                <li>"SEO Secrets Revealed" – Enhancing visibility through strategic content.</li>
+                <li>"Creative Copy that Converts" – Persuasive writing for marketing success.</li>
+            </ul>
+        </div>
+
+        <!-- Panel 3: Editorials -->
+        <div class="panel panel3">
+            <h2>Editorial Pieces</h2>
+            <ul class="article-list">
+                <li>"The Future of Content Marketing" – Trends shaping the industry.</li>
+                <li>"Balancing Creativity & Strategy" – Producing engaging, strategic content.</li>
+                <li>"Breaking the Mold" – How fresh ideas disrupt traditional media.</li>
+            </ul>
+        </div>
+
+        <!-- Panel 4: Contact -->
+        <div class="panel panel4">
+            <h2>Contact Me</h2>
+            <form onsubmit="event.preventDefault(); alert('Thank you for your message!');">
+                <input type="text" placeholder="Your Name" required />
+                <input type="email" placeholder="Your Email" required />
+                <textarea rows="5" placeholder="Your Message" required></textarea>
+                <button type="submit">Send Message</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function toggleTheme() {
+            document.body.classList.toggle('light');
+            document.body.classList.toggle('dark');
+        }
+        function scrollToPanel(index) {
+            const container = document.getElementById('hScroll');
+            const panelWidth = window.innerWidth;
+            container.style.transform = translateX(`-${index * panelWidth}px`);
+        }
+    </script>
+</body>
+
+</html>

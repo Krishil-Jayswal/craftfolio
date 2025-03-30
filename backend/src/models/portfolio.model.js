@@ -1,54 +1,45 @@
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 
-const portfolioSchema = new mongoose.Schema({
-  id: {
-    type: String,
-    required: true,
-    trim: true,
+const portfolioSchema = new mongoose.Schema(
+  {
+    userId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+    },
+    title: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+    description: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+    prompt: {
+      type: String,
+      trim: true,
+    },
+    type: {
+      type: String,
+      required: true,
+      enum: ["template", "prebuilt", "generated"],
+    },
+    codeurl: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+    imageurl: {
+      type: String,
+      trim: true,
+    },
   },
-  userId: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
-  },
-  title: {
-    type: String,
-    required: true,
-    trim: true,
-  },
-  description: {
-    type: String,
-    required: true,
-    trim: true,
-  },
-  isTemplate: {
-    type: Boolean,
-    default: false,
-  },
-  title: {
-    type: String,
-    required: true,
-    trim: true,
-  },
-  description: {
-    type: String,
-    required: true,
-    trim: true,
-  },
-  codeurl: {
-    type: String,
-    required: true,
-    trim: true,
-  },
-  imageurl: {
-    type: String,
-    required: true,
-    trim: true,
-  },
-}, 
-{
-    timestamps: true 
-});
+  {
+    timestamps: true,
+  }
+);
 
-const Portfolio = mongoose.model('Portfolio', portfolioSchema);
+const Portfolio = mongoose.model("Portfolio", portfolioSchema);
 
 export default Portfolio;

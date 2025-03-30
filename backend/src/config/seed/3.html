@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Samantha Lee | Marketing Fresher</title>
+    <style>
+        /* Base & Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            transition: background 0.5s, color 0.5s;
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* Themes */
+        body.light {
+            background: #fff;
+            color: #333;
+        }
+
+        body.dark {
+            background: #2b2b2b;
+            color: #ddd;
+        }
+
+        /* Right-Side Navigation (Vertical) */
+        .side-nav {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 200px;
+            height: 100vh;
+            background: #ff5722;
+            color: #fff;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 999;
+        }
+
+        .nav-links {
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin: 20px 0;
+        }
+
+        .nav-links a {
+            color: #fff;
+            font-weight: bold;
+            transition: transform 0.3s;
+        }
+
+        .nav-links a:hover {
+            transform: translateX(-5px);
+        }
+
+        .toggle-btn {
+            background: transparent;
+            border: 1px solid #fff;
+            padding: 6px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            color: #fff;
+            font-size: 0.9em;
+        }
+
+        /* Diagonal Header Section */
+        .header {
+            width: calc(100% - 200px);
+            /* subtract side nav width */
+            height: 100vh;
+            background: linear-gradient(135deg, #ff9800 50%, #ff5722 50%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 40px;
+            clip-path: polygon(0 0, 100% 0, 100% 100%, 0 80%);
+        }
+
+        .header h1 {
+            font-size: 3em;
+            margin-bottom: 20px;
+            color: #fff;
+            animation: slideIn 1s ease forwards;
+            opacity: 0;
+            transform: translateX(-30px);
+        }
+
+        .header p {
+            font-size: 1.2em;
+            color: #fff;
+            max-width: 400px;
+            animation: slideIn 1.2s ease forwards;
+            opacity: 0;
+            transform: translateX(-30px);
+        }
+
+        @keyframes slideIn {
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* Section Titles */
+        .section-title {
+            font-size: 2em;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: "";
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: #ff5722;
+        }
+
+        /* Content Sections */
+        section {
+            padding: 60px 30px;
+            width: calc(100% - 200px);
+            margin-left: 0;
+        }
+
+        .about,
+        .projects,
+        .skills,
+        .contact {
+            background: #f9f9f9;
+            margin-bottom: 40px;
+            border-radius: 8px;
+            padding: 40px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        body.dark .about,
+        body.dark .projects,
+        body.dark .skills,
+        body.dark .contact {
+            background: #3a3a3a;
+        }
+
+        /* Projects Cards */
+        .project-cards {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .project-card {
+            flex: 1;
+            min-width: 250px;
+            background: #fff;
+            padding: 20px;
+            border-radius: 6px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+        }
+
+        body.dark .project-card {
+            background: #555;
+        }
+
+        /* Skills Badges */
+        .skill-badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .skill {
+            background: #ff5722;
+            color: #fff;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            transition: transform 0.3s;
+        }
+
+        .skill:hover {
+            transform: scale(1.1);
+        }
+
+        body.dark .skill {
+            background: #ff9800;
+        }
+
+        /* Contact Form */
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            max-width: 500px;
+        }
+
+        form input,
+        form textarea {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 1em;
+        }
+
+        form button {
+            background: #ff5722;
+            color: #fff;
+            border: none;
+            padding: 10px;
+            border-radius: 4px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        form button:hover {
+            background: #e64a19;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .side-nav {
+                width: 150px;
+            }
+
+            .header {
+                width: calc(100% - 150px);
+                clip-path: none;
+                height: 60vh;
+            }
+
+            .header h1 {
+                font-size: 2em;
+            }
+
+            .header p {
+                font-size: 1em;
+            }
+
+            section {
+                width: calc(100% - 150px);
+                padding: 30px;
+            }
+        }
+    </style>
+</head>
+
+<body class="light">
+    <!-- Side Navigation -->
+    <div class="side-nav">
+        <h2>Samantha Lee</h2>
+        <ul class="nav-links">
+            <li><a href="#header">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#projects">Campaigns</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        <button class="toggle-btn" onclick="toggleTheme()">Toggle Theme</button>
+    </div>
+
+    <!-- Diagonal Header -->
+    <div class="header" id="header">
+        <h1>Samantha Lee</h1>
+        <p>Marketing Fresher Ready to Innovate</p>
+    </div>
+
+    <!-- Main Content -->
+    <section class="about" id="about">
+        <div class="section-title">About Me</div>
+        <p>I am an enthusiastic marketing fresher with a passion for digital campaigns, brand building, and content
+            strategy. I thrive on creative problem-solving and love crafting campaigns that engage audiences.</p>
+    </section>
+
+    <section class="projects" id="projects">
+        <div class="section-title">Campaigns</div>
+        <div class="project-cards">
+            <div class="project-card">
+                <h3>Social Media Boost</h3>
+                <p>Implemented a social media campaign that drove a 40% increase in engagement.</p>
+            </div>
+            <div class="project-card">
+                <h3>Email Outreach</h3>
+                <p>Crafted targeted email strategies that lifted conversions by 25%.</p>
+            </div>
+            <div class="project-card">
+                <h3>Brand Refresh</h3>
+                <p>Assisted in rebranding for a modernized identity, improving brand recall by 30%.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="skills" id="skills">
+        <div class="section-title">Skills</div>
+        <p>From social media mastery to strategic content planning, here are my core marketing skills:</p>
+        <div class="skill-badges">
+            <div class="skill">Social Media</div>
+            <div class="skill">Content Strategy</div>
+            <div class="skill">Branding</div>
+            <div class="skill">Email Marketing</div>
+            <div class="skill">SEO</div>
+        </div>
+    </section>
+
+    <section class="contact" id="contact">
+        <div class="section-title">Contact</div>
+        <form onsubmit="event.preventDefault(); alert('Thank you for reaching out!');">
+            <input type="text" placeholder="Your Name" required />
+            <input type="email" placeholder="Your Email" required />
+            <textarea rows="4" placeholder="Your Message" required></textarea>
+            <button type="submit">Send Message</button>
+        </form>
+    </section>
+
+    <script>
+        function toggleTheme() {
+            document.body.classList.toggle('light');
+            document.body.classList.toggle('dark');
+        }
+    </script>
+</body>
+
+</html>

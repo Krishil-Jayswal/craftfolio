@@ -1,20 +1,11 @@
 import express from "express";
-import {
-  generatePortfolio,
-  getTemplateById,
-  getTemplates,
-  updatePortfolio,
-} from "../controllers/portfolio.controller.js";
-import { authMiddleware } from "../middlewares/auth.middleware.js";
+import templateRouter from "./template.route.js";
+import aiRouter from "./ai.route.js";
 
 const portfolioRouter = express.Router();
 
-portfolioRouter.get("/templates", authMiddleware, getTemplates);
+portfolioRouter.use("/templates", templateRouter);
 
-portfolioRouter.post("/generate", authMiddleware, generatePortfolio);
-
-portfolioRouter.get("/:id", authMiddleware, getTemplateById);
-
-portfolioRouter.put("/id", authMiddleware, updatePortfolio);
+portfolioRouter.use("/ai", aiRouter);
 
 export default portfolioRouter;
