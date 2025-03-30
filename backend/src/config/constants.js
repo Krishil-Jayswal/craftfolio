@@ -11,6 +11,8 @@ export const PORT = process.env.PORT || "3000";
 
 export const CLIENT_URL = process.env.CLIENT_URL || "http://localhost:5173";
 
+export const CLIENT_URL_2 = process.env.CLIENT_URL_2;
+
 export const maxAge = process.env.maxAge || 604800000;
 
 export const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
