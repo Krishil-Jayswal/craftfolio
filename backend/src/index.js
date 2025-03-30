@@ -2,12 +2,12 @@ import express from "express";
 import V1Router from "./routes/index.route.js";
 import cors from "cors";
 import { connectDB } from "./config/db.js";
-import { CLIENT_URL, CLIENT_URL_2, DATABASE_URL, PORT } from "./config/constants.js";
+import { CLIENT_URL, DATABASE_URL, PORT } from "./config/constants.js";
 
 const app = express();
 
 app.use(cors({
-    origin: [CLIENT_URL, CLIENT_URL_2],
+    origin: CLIENT_URL,
     allowedHeaders: ["Content-Type", "Authorization"],
     methods: ["GET", "POST", "PUT", "DELETE"]
 }));
