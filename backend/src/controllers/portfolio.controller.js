@@ -55,6 +55,11 @@ export const getTemplateById = async (req, res) => {
   }
 };
 
+export const createPortfolio = (req, res) => {
+  try {
+  } catch (error) {}
+};
+
 export const generatePortfolio = async (req, res) => {
   const { prompt } = req.body;
   if (!prompt) {
@@ -81,8 +86,7 @@ export const generatePortfolio = async (req, res) => {
   const enrichedResponse = await model.generateContent(enrichmentPrompt);
   const enrichedPrompt = enrichedResponse.response.text();
 
-  const systemPrompt = 
-  `
+  const systemPrompt = `
     You are an expert **front-end developer and UI/UX designer** with deep mastery of **HTML, CSS, JavaScript, GSAP, Three.js, and TailwindCSS**.  
     Your task is to generate a **fully interactive, visually stunning, and futuristic portfolio** inside a **single index.html file**.
 
